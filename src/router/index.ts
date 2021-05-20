@@ -17,7 +17,7 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import(/* webpackChunkName: "Default" */ "../layout/Default.vue"),
     beforeEnter: (to, form, next) => {
-      store.state.auth.isAuthorization ? next() : next("login");
+      store.state.isAuthorization ? next() : next("login");
     },
     children: [
       {

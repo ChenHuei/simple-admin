@@ -1,18 +1,23 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-// modules
-import auth from "./modules/auth";
-
 // types
-import { Auth } from "./../types/store/auth";
+import { Store } from "../types/store";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store<{
-  auth: Auth;
-}>({
-  modules: {
-    auth,
+export default new Vuex.Store<Store>({
+  state: {
+    isAuthorization: false,
+  },
+  mutations: {
+    SET_IS_AUTHORIZATION(state, payload: boolean) {
+      state.isAuthorization = payload;
+    },
+  },
+  actions: {
+    setIsAuthorization({ commit }, payload: boolean): void {
+      commit("SET_IS_AUTHORIZATION", payload);
+    },
   },
 });
