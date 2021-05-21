@@ -8,16 +8,14 @@
           class="h-8 p-2 mb-4 border"
           type="text"
           placeholder="輸入帳號"
-          :class="isError ? 'border-red-400' : ''"
-          @input="resetError"
+          :class="$v.form.account.$error ? 'border-red-400' : ''"
         />
         <input
           v-model="form.password"
           class="h-8 p-2 mb-4 border"
           type="password"
           placeholder="輸入密碼"
-          :class="isError ? 'border-red-400' : ''"
-          @input="resetError"
+          :class="$v.form.password.$error ? 'border-red-400' : ''"
           @keyup.enter="login"
         />
         <div class="flex justify-end items-center">
@@ -30,51 +28,62 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { required, email, numeric } from "vuelidate/lib/validators";
 
 // components
 import Button from "@/components/basic/Button.vue";
-
-// utils
-import { isNumber, isUrl } from "@/utils/regexp";
 
 export default Vue.extend({
   name: "Login",
   components: { Button },
   data() {
     return {
-      isError: false,
       form: {
         account: "",
         password: "",
       },
     };
   },
+  validations: {
+    form: {
+      account: {
+        required,
+        email,
+      },
+      password: {
+        required,
+        numeric,
+      },
+    },
+  },
   methods: {
     login() {
       this.validateForm()
+        .then(() => this.postApi())
         .then(() => {
           localStorage.setItem("isAuthorization", "true");
           this.$router.push({ path: "/" });
         })
         .catch(() => {
-          this.isError = true;
+          console.error("error");
         });
     },
     validateForm(): Promise<void> {
       return new Promise((resolve, reject) => {
-        const { account, password } = this.form;
-
-        if (isUrl(account) && isNumber(password)) {
-          account === "aaa830714@gmail.com" && password === "123456"
-            ? resolve()
-            : reject(new Error("api error"));
-        } else {
-          reject(new Error("validation error"));
-        }
+        this.$v.form.$touch();
+        this.$v.form.$invalid
+          ? reject(new Error("validation error"))
+          : resolve();
       });
     },
-    resetError() {
-      this.isError = false;
+    postApi(): Promise<void> {
+      return new Promise((resolve, reject) => {
+        const { account, password } = this.form;
+
+        account === "aaa830714@gmail.com" && password === "123456"
+          ? resolve()
+          : reject(new Error("api error"));
+      });
     },
   },
 });
