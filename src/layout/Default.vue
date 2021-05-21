@@ -26,7 +26,7 @@
       </div>
     </nav>
     <router-view class="flex-1 p-4"></router-view>
-    <div class="w-10 h-screen p2">
+    <div class="w-12 h-screen p-2">
       <img :src="require('@/assets/images/user.svg')" alt="user" />
     </div>
   </div>
