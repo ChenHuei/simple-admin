@@ -73,11 +73,10 @@ export default Vue.extend({
     this.data = this.statusList.map((status) => {
       return {
         ...status,
-        list: (this.orders as ListItem[])
-          .filter((item) => status.value.includes(item.status.code))
-          .sort(
-            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-          ),
+        list: (this.orders as ListItem[]).filter(
+          (item) =>
+            item.status.code !== "" && status.value.includes(item.status.code)
+        ),
       };
     });
   },

@@ -61,7 +61,9 @@ export default new Vuex.Store<{
   },
   getters: {
     orders(state): ListItem[] {
-      return state.orders;
+      return state.orders.sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
     },
   },
 });
