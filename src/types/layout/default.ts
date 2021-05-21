@@ -1,5 +1,6 @@
 export interface Menu {
   title: string;
   link: string;
-  children?: Menu[];
+  isToggle: boolean;
+  children?: Omit<Menu, "isToggle">[];
 }
