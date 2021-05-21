@@ -8,6 +8,7 @@
           class="h-8 p-2 mb-4 border"
           type="text"
           placeholder="輸入帳號"
+          :class="isError ? 'border-red-400' : ''"
           @input="resetError"
         />
         <input
@@ -15,6 +16,7 @@
           class="h-8 p-2 mb-4 border"
           type="password"
           placeholder="輸入密碼"
+          :class="isError ? 'border-red-400' : ''"
           @input="resetError"
           @keyup.enter="login"
         />
@@ -44,14 +46,17 @@
 import Vue from "vue";
 import { mapActions } from "vuex";
 
+// utils
+import { isNumber, isUrl } from "@/utils/regexp";
+
 export default Vue.extend({
   name: "Login",
   data() {
     return {
       isError: false,
       form: {
-        account: "aaa83017@gmail.com",
-        password: "123456",
+        account: "",
+        password: "",
       },
     };
   },
@@ -73,9 +78,13 @@ export default Vue.extend({
       return new Promise((resolve, reject) => {
         const { account, password } = this.form;
 
-        account === "aaa83017@gmail.com" && password === "123456"
-          ? resolve()
-          : reject(new Error("error"));
+        if (isUrl(account) && isNumber(password)) {
+          account === "aaa830714@gmail.com" && password === "123456"
+            ? resolve()
+            : reject(new Error("api error"));
+        } else {
+          reject(new Error("validation error"));
+        }
       });
     },
     resetError() {

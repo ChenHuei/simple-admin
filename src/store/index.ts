@@ -8,11 +8,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store<Store>({
   state: {
-    isAuthorization: false,
+    isAuthorization: localStorage.getItem("isAuthorization") === "true",
   },
   mutations: {
     SET_IS_AUTHORIZATION(state, payload: boolean) {
       state.isAuthorization = payload;
+      localStorage.setItem("isAuthorization", payload.toString());
     },
   },
   actions: {
