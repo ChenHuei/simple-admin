@@ -142,15 +142,8 @@ export default Vue.extend({
       this.validateForm()
         .then(() => {
           this.addOrder(this.list);
-          this.list = [
-            {
-              ...(deepCopy(DEFAULT_VALUE) as ItemValue),
-              status: {
-                code: "",
-                type: "",
-              },
-            },
-          ];
+          this.list.splice(0);
+          this.list = [{ ...(deepCopy(DEFAULT_VALUE) as ItemValue) }];
           this.$v.list.$reset();
           alert("新增成功");
         })
