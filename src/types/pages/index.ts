@@ -1,5 +1,5 @@
 export interface StatusOption {
-  code: number;
+  code: number | "";
   type: string;
 }
 

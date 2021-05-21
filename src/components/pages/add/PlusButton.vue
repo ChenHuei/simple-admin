@@ -7,6 +7,7 @@
       transform
       -translate-x-1/2 -translate-y-1/2
     "
+    v-on="$listeners"
   >
     <div
       class="

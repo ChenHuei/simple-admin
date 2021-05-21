@@ -18,7 +18,7 @@ export default new Vuex.Store<{
           code: 3,
           type: "已取消",
         },
-        date: "107/6/12",
+        date: "2018/6/12",
       },
       {
         name: "BALMUDA The Toaster 百慕達烤麵包機-黑色",
@@ -27,7 +27,7 @@ export default new Vuex.Store<{
           code: 2,
           type: "已成立",
         },
-        date: "108/7/21",
+        date: "2019/7/21",
       },
       {
         name: "贈-短慧萬用鍋HD2133+三合一濾網「LG樂金」韓國原裝...",
@@ -36,7 +36,7 @@ export default new Vuex.Store<{
           code: 1,
           type: "處理中",
         },
-        date: "108/6/2",
+        date: "2019/6/2",
       },
       {
         name: "Apple AirPds 2",
@@ -45,7 +45,7 @@ export default new Vuex.Store<{
           code: 4,
           type: "已送達",
         },
-        date: "108/3/02",
+        date: "2019/3/02",
       },
     ],
   },
