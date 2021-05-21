@@ -13,7 +13,6 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/",
-    name: "Default",
     component: () =>
       import(/* webpackChunkName: "Default" */ "../layout/Default.vue"),
     beforeEnter: (to, form, next) => {
