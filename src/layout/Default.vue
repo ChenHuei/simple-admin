@@ -36,7 +36,7 @@
 import Vue from "vue";
 
 // components
-import CollapseTransition from "@/components/CollapseTransition.vue";
+import CollapseTransition from "@/components/basic/CollapseTransition.vue";
 
 // constants
 import { MENU_LIST } from "@/constants/layout/default";

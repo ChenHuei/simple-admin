@@ -21,21 +21,7 @@
           @keyup.enter="login"
         />
         <div class="flex justify-end items-center">
-          <button
-            class="
-              px-4
-              py-2
-              border
-              rounded-xl
-              transition
-              hover:bg-green-200
-              hover:border-green-200
-            "
-            style="outline: none"
-            @click="login"
-          >
-            Login
-          </button>
+          <Button @click="login"> Login</Button>
         </div>
       </div>
     </div>
@@ -44,13 +30,16 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { mapActions } from "vuex";
+
+// components
+import Button from "@/components/basic/Button.vue";
 
 // utils
 import { isNumber, isUrl } from "@/utils/regexp";
 
 export default Vue.extend({
   name: "Login",
+  components: { Button },
   data() {
     return {
       isError: false,
@@ -61,13 +50,10 @@ export default Vue.extend({
     };
   },
   methods: {
-    ...mapActions({
-      setIsAuthorization: "setIsAuthorization",
-    }),
     login() {
       this.validateForm()
         .then(() => {
-          this.setIsAuthorization(true);
+          localStorage.setItem("isAuthorization", "true");
           this.$router.push({ path: "/" });
         })
         .catch(() => {

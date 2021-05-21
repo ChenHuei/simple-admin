@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import store from "../store/index";
 
 Vue.use(VueRouter);
 
@@ -16,7 +15,9 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import(/* webpackChunkName: "Default" */ "../layout/Default.vue"),
     beforeEnter: (to, form, next) => {
-      store.state.isAuthorization ? next() : next("login");
+      localStorage.getItem("isAuthorization") === "true"
+        ? next()
+        : next("login");
     },
     children: [
       {

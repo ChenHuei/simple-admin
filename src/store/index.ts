@@ -1,15 +1,15 @@
-import { ListItem } from "@/types/pages/list";
 import Vue from "vue";
 import Vuex from "vuex";
 
 // types
-import { Store } from "../types/store";
+import { ListItem } from "@/types/pages";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store<Store>({
+export default new Vuex.Store<{
+  orders: ListItem[];
+}>({
   state: {
-    isAuthorization: localStorage.getItem("isAuthorization") === "true",
     orders: [
       {
         name: "Livi優活 抽取式衛生紙(100抽x10包x10串/箱)",
@@ -50,14 +50,13 @@ export default new Vuex.Store<Store>({
     ],
   },
   mutations: {
-    SET_IS_AUTHORIZATION(state, payload: boolean) {
-      state.isAuthorization = payload;
-      localStorage.setItem("isAuthorization", payload.toString());
+    ADD_ORDER(state, payload: ListItem[]): void {
+      state.orders = [...state.orders, ...payload];
     },
   },
   actions: {
-    setIsAuthorization({ commit }, payload: boolean): void {
-      commit("SET_IS_AUTHORIZATION", payload);
+    addOrder({ commit }, payload: ListItem[]): void {
+      commit("ADD_ORDER", payload);
     },
   },
   getters: {
